@@ -21,25 +21,33 @@ const Search = () => {
 
     return(
         <section id="search">
-            <h2>Procurando algum super herói?</h2>
+            <h2>Looking for a superhero?</h2>
             <form>
                 <input 
                     type="text"
+                    placeholder="Batman..."
                     value={searchName}
                     onChange={e => handleUpdateSearchName(e)}
                     />
                 <button
                     onClick={e => submitSearch(e)}
-                >Procurar</button>
+                >Search</button>
             </form>
 
-            {
-                results.map(result => {
-                    return(
-                        <HeroCard props={result} />
+            <main className="container">
+                {
+                    results && results.length !== 0 && (
+                        <p id="results">{results.length} results</p>
                     )
-                })
-            }
+                }
+                {
+                    results && results.length !== 0 && results.map(result => {
+                        return(
+                            <HeroCard key={result.id} info={result} />
+                        )
+                    })
+                }
+            </main>
         </section>
     );
 }

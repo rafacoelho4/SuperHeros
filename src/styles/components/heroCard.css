@@ -1,0 +1,27 @@
+#hero-card {
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(165, 165, 165);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 30px 20px 0px 20px;
+}
+
+#hero-card:hover {
+    transform: scale(1.03);
+}
+
+#hero-card img {
+    height: 200px;
+    width: auto;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#hero-card main {
+    padding: 14px;
+}

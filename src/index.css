@@ -16,7 +16,8 @@ body {
 :root {
   --color-background: #27292b;
 
-  --color-primary: #2A3542;
+  /* --color-primary: #2A3542; */
+  --color-primary: #390c63;
   --color-secondary: #3F3522;
   --color-tertiary: #590004;
 

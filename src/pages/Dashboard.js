@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { FiLogOut, FiHeart, FiBook } from 'react-icons/fi';
-import { Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect, useLocation } from 'react';
+import { FiLogOut, FiHeart, FiBook, FiSearch } from 'react-icons/fi';
+import { Switch, Route, Link, BrowserRouter, matchPath } from 'react-router-dom';
 
 import api from '../services/api';
 import '../styles/header.css';
+
 import Search from './Search';
+import Favorites from './Favorites';
+import Browse from './Browse';
 
 const Dashboard = () => {
 
     const [ toggle, setToggle ] = useState(true);
     const [ selected, setSelected ] = useState(0);
+    const [ location, setLocation ] = useState('');
 
     const [ superheroes, setSuperHeroes ] = useState([]);
 
@@ -21,28 +25,17 @@ const Dashboard = () => {
         setSelected(value);
     }
 
-    const searchHero = async () => {
-        try {
-
-            // for(var i = 1; i < 10; i++) {
-            //     await api.get(`/${i}`).then(hero => {
-            //         console.log(i)
-            //         console.log(hero)
-            //         setSuperHeroes([superheroes, hero.data]);
-            //         // console.log(superheroes)
-            //     })
-            // }
-        } catch (error) {
-            
-        }
-    }
-
     useEffect(() => {
-        searchHero();
-    }, [])
+        setLocation(window.location.pathname);
+        // Verifies path and matches with selected link in drawer
+        if (location === './browse') setSelected(0);
+        else if (location === '/search') setSelected(1);
+        else if (location === '/favorites') setSelected(2);
+    }, [location]);
 
     return(
         <section id="header">
+            <BrowserRouter>
             <header>
                 <div id="left-header">
                     <div 
@@ -53,7 +46,7 @@ const Dashboard = () => {
                         <div class="line3"></div>
                     </div>
 
-                    <h3>Super Herois<span>by Rafael Coelho</span></h3>
+                    <h3>Super Heros<span>by Rafael Coelho</span></h3>
                 </div>
                 
                 <div id="logout">
@@ -69,30 +62,45 @@ const Dashboard = () => {
                     }}
                 ></span>
 
-                <div 
-                    className={0 === selected ? "option selected" : "option"}
-                    onClick={() => handleSelected(0)} >
-                    <FiBook className="icon" />
-                    <p>Explorar</p>
-                </div>
+                <Link to="/browse" className="header-link" >
+                    <div 
+                        className={0 === selected ? "option selected" : "option"}
+                        onClick={() => handleSelected(0)} >
+                        <FiBook className="icon" />
+                        <p>Explore</p>
+                    </div>
+                </Link>
 
-                <div 
-                    className={1 === selected ? "option selected" : "option"}
-                    onClick={() => handleSelected(1)} >
-                    <FiHeart className="icon" />
-                    <p>Favoritos</p>
-                </div>
+                <Link to="/search" className="header-link">
+                    <div 
+                        className={1 === selected ? "option selected" : "option"}
+                        onClick={() => handleSelected(1)} >
+                        <FiSearch className="icon" />
+                        <p>Search</p>
+                    </div>
+                </Link>
+                
+                <Link to="/favorites" className="header-link"> 
+                    <div 
+                        className={2 === selected ? "option selected" : "option"}
+                        onClick={() => handleSelected(2)} >
+                        <FiHeart className="icon" />
+                        <p>Favorites</p>
+                    </div>
+                </Link>
+                
 
             </aside>
 
-            <main id="dashboard-content">
-                {/* <Switch>
-                    <Route path="/search" exact={true} component={Search}/>
-                </Switch> */}
-            </main>
 
-            <Search />
-
+            <Switch>
+                <Route path="/" exact={true} component={Browse}/>
+                <Route path="/search" exact={false} component={Search}/>
+                <Route path="/favorites" exact={true} component={Favorites}/>
+                <Route path="/browse" exact={true} component={Browse}/>
+            </Switch>
+            
+            </BrowserRouter>
         </section>
     );
 }

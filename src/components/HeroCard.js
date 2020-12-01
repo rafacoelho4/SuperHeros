@@ -1,12 +1,20 @@
 import React from 'react';
 
-const HeroCard = ({props}) => {
+import '../styles/components/heroCard.css';
+
+const HeroCard = (props) => {
     return(
-        <>
-            <h4>{props.name}</h4>
-            <p>{props.appearance.height[1]}</p>
-            <img src={props.image.url} alt={props.name}/>
-        </>
+        <section id="hero-card">
+            <img src={props.info.image.url} alt={props.info.name}/>
+            <main>
+                <h4>{props.info.name}</h4>
+                <p>{props.info.biography["full-name"]}</p>
+                <p>{props.info.biography["publisher"]}</p>
+                <p>{props.info.appearance.race}</p>
+                {/* <p>{props.info.appearance.height[1]}</p>
+                <p>{props.info.appearance.weight[1]}</p> */}
+            </main>
+        </section>
     )
 }
 

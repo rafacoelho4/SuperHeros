@@ -2,11 +2,11 @@ section#search {
     height: auto;
     width: auto;
     flex: 1;
-    padding: 20px 30px;
+    padding: 10vh 30px 50px 30px;
 }
 
 section#search h2 {
-    margin: 20px 0px 10px 0px;
+    margin: 30px 0px 6px 0px;
     color: var(--color-primary);
 }
 
@@ -39,4 +39,28 @@ section#search form button {
 
     border-bottom-right-radius: 6px;
     border-top-right-radius: 6px;
+
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font: 14px var(--font-title) ;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+section#search form button:hover {
+    opacity: 0.9;
+}
+
+section#search p#results {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+section#search main.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
 }
